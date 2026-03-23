@@ -1,0 +1,229 @@
+/* Navbar Styles */
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    background: rgba(10, 14, 23, 0.8);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid rgba(0, 255, 255, 0.1);
+    transition: all var(--transition-base);
+}
+
+.navbar-scrolled {
+    background: rgba(10, 14, 23, 0.95);
+    border-bottom-color: var(--color-cyan-primary);
+    box-shadow: 0 4px 30px rgba(0, 255, 255, 0.1);
+}
+
+.navbar-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.25rem var(--container-padding);
+}
+
+.navbar-logo {
+    position: relative;
+    z-index: 1001;
+}
+
+.logo-text {
+    font-family: var(--font-heading);
+    font-size: 1.5rem;
+    font-weight: 900;
+    letter-spacing: 0.1em;
+    color: var(--color-text-primary);
+    text-transform: uppercase;
+    position: relative;
+}
+
+.logo-accent {
+    color: var(--color-cyan-primary);
+    text-shadow: var(--glow-cyan);
+}
+
+.logo-pulse {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle, var(--color-cyan-primary) 0%, transparent 70%);
+    opacity: 0.2;
+    animation: pulse 2s ease-in-out infinite;
+}
+
+.navbar-menu {
+    display: flex;
+    align-items: center;
+    gap: 2.5rem;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.navbar-menu li button {
+    font-family: var(--font-heading);
+    font-size: 0.9375rem;
+    font-weight: 500;
+    color: var(--color-text-secondary);
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0.5rem 0;
+    position: relative;
+    transition: all var(--transition-fast);
+    letter-spacing: 0.02em;
+}
+
+.navbar-menu li button::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--color-cyan-primary), var(--color-blue-electric));
+    transition: width var(--transition-base);
+}
+
+.navbar-menu li button:hover {
+    color: var(--color-cyan-primary);
+}
+
+.navbar-menu li button:hover::after {
+    width: 100%;
+}
+
+.navbar-cta {
+    margin-left: 1rem;
+}
+
+.navbar-cta .btn {
+    padding: 0.75rem 1.75rem;
+    font-size: 0.875rem;
+}
+
+/* Mobile Menu Toggle */
+.mobile-menu-toggle {
+    display: none;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0.5rem;
+    z-index: 1001;
+    position: relative;
+}
+
+.hamburger {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    width: 28px;
+    height: 20px;
+}
+
+.hamburger span {
+    display: block;
+    width: 100%;
+    height: 2px;
+    background: var(--color-cyan-primary);
+    border-radius: 2px;
+    transition: all var(--transition-base);
+    box-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
+}
+
+.hamburger.active span:nth-child(1) {
+    transform: translateY(7px) rotate(45deg);
+}
+
+.hamburger.active span:nth-child(2) {
+    opacity: 0;
+}
+
+.hamburger.active span:nth-child(3) {
+    transform: translateY(-7px) rotate(-45deg);
+}
+
+/* Responsive Design */
+@media (max-width: 968px) {
+    .navbar-menu {
+        gap: 1.5rem;
+    }
+
+    .navbar-menu li button {
+        font-size: 0.875rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .mobile-menu-toggle {
+        display: block;
+    }
+
+    .navbar-menu {
+        position: fixed;
+        top: 0;
+        right: -100%;
+        width: 280px;
+        height: 100vh;
+        background: linear-gradient(135deg, var(--color-bg-elevated), var(--color-bg-tertiary));
+        border-left: 1px solid rgba(0, 255, 255, 0.2);
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0;
+        padding: 6rem 2rem 2rem;
+        transition: right var(--transition-slow);
+        overflow-y: auto;
+    }
+
+    .navbar-menu.mobile-open {
+        right: 0;
+        box-shadow: -10px 0 50px rgba(0, 255, 255, 0.2);
+    }
+
+    .navbar-menu li {
+        width: 100%;
+        border-bottom: 1px solid rgba(0, 255, 255, 0.1);
+    }
+
+    .navbar-menu li button {
+        width: 100%;
+        text-align: left;
+        padding: 1.25rem 0;
+        font-size: 1rem;
+    }
+
+    .navbar-menu li button::after {
+        display: none;
+    }
+
+    .navbar-cta {
+        margin-left: 0;
+        margin-top: 1.5rem;
+        width: 100%;
+    }
+
+    .navbar-cta .btn {
+        width: 100%;
+        justify-content: center;
+    }
+}
+
+@media (max-width: 480px) {
+    .navbar-container {
+        padding: 1rem var(--container-padding);
+    }
+
+    .logo-text {
+        font-size: 1.25rem;
+    }
+
+    .navbar-menu {
+        width: 100%;
+        right: -100%;
+    }
+}
