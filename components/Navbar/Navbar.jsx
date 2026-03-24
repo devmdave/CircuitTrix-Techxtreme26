@@ -30,13 +30,35 @@ export default function Navbar() {
         return () => window.removeEventListener('scroll', handleScroll);
     }, []);
 
-    const scrollToSection = (sectionId) => {
-        const element = document.getElementById(sectionId === 'home' ? 'hero' : sectionId);
-        if (element) {
-            element.scrollIntoView({ behavior: 'smooth', block: 'start' });
-            setIsMobileMenuOpen(false);
-            setActiveSection(sectionId);
+    useEffect(() => {
+        if (isMobileMenuOpen) {
+            document.body.style.overflow = 'hidden';
+        } else {
+            document.body.style.overflow = '';
         }
+        return () => {
+            document.body.style.overflow = '';
+        };
+    }, [isMobileMenuOpen]);
+
+    const scrollToSection = (sectionId) => {
+        setIsMobileMenuOpen(false);
+        setActiveSection(sectionId);
+        
+        // Use timeout to allow state update and mobile menu to start closing
+        setTimeout(() => {
+            const element = document.getElementById(sectionId === 'home' ? 'hero' : sectionId);
+            if (element) {
+                const navHeight = 80;
+                const elementPosition = element.getBoundingClientRect().top;
+                const offsetPosition = elementPosition + window.scrollY - navHeight;
+
+                window.scrollTo({
+                    top: offsetPosition,
+                    behavior: 'smooth'
+                });
+            }
+        }, 50);
     };
 
     const navItems = ['Home', 'About', 'Schedule', 'Rules', 'Team', 'Contact'];
@@ -152,7 +174,7 @@ export default function Navbar() {
 
                     {/* Mobile Menu Toggle */}
                     <button
-                        className="md:hidden relative z-50 p-2 text-accent-primary"
+                        className="md:hidden relative z-50 p-2 text-accent-primary cursor-pointer touch-manipulation"
                         onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
                         aria-label="Toggle menu"
                     >
@@ -175,12 +197,13 @@ export default function Navbar() {
                         initial={{ opacity: 0, y: -20, height: 0 }}
                         animate={{ opacity: 1, y: 0, height: 'auto' }}
                         exit={{ opacity: 0, y: -20, height: 0 }}
-                        className="md:hidden bg-[#0a0a0a]/95 backdrop-blur-xl border-b border-accent-primary/20 overflow-y-auto max-h-[85vh]"
+                        className="absolute top-full left-0 w-full md:hidden bg-[#0a0a0a]/95 backdrop-blur-xl border-b border-accent-primary/20 overflow-y-auto max-h-[calc(100vh-80px)] origin-top shadow-2xl"
                     >
-                        <div className="px-4 py-6 flex flex-col gap-4">
+                        <div className="py-2 flex flex-col">
                             {navItems.map((item, i) => {
                                 const id = item.toLowerCase();
                                 const hrefId = id === 'home' ? 'hero' : id;
+                                const isActive = activeSection === id;
                                 return (
                                     <motion.a
                                         href={`#${hrefId}`}
@@ -192,26 +215,43 @@ export default function Navbar() {
                                             e.preventDefault();
                                             scrollToSection(id);
                                         }}
-                                        className="text-left font-mono text-sm uppercase tracking-widest text-[#F2F2F2] py-3 border-b border-white/5 flex items-center justify-between group cursor-pointer block"
+                                        className={`px-6 py-4 text-left font-mono text-sm uppercase tracking-widest border-b border-white/5 flex items-center justify-between group cursor-pointer w-full touch-manipulation transition-colors duration-300 ${
+                                            isActive 
+                                                ? 'text-accent-primary font-bold bg-accent-primary/[0.08] shadow-[inset_4px_0_0_0_rgba(0,246,255,1)]' 
+                                                : 'text-[#F2F2F2] hover:bg-white/5 active:bg-white/10'
+                                        }`}
                                     >
-                                        <span>{item}</span>
-                                        <span className="text-accent-primary opacity-0 group-hover:opacity-100 transition-opacity">
+                                        <span className="flex items-center gap-3">
+                                            {isActive && (
+                                                <span className="w-1.5 h-1.5 bg-accent-primary rounded-none shadow-[0_0_8px_#00F6FF] animate-pulse" />
+                                            )}
+                                            <span className="flex items-center">
+                                                {item}
+                                                {isActive && (
+                                                    <span className="font-mono text-[10px] text-accent-primary/50 ml-2 opacity-70">.EXE</span>
+                                                )}
+                                            </span>
+                                        </span>
+                                        <span className={`text-accent-primary transition-opacity ${isActive ? 'opacity-100' : 'opacity-0 group-hover:opacity-100'}`}>
                                             &gt;
                                         </span>
                                     </motion.a>
                                 );
                             })}
-                            <motion.a
-                                href="https://techxtreme.gu-tech.org/event/technical/27"
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                initial={{ opacity: 0 }}
-                                animate={{ opacity: 1 }}
-                                transition={{ delay: 0.5 }}
-                                className="mt-4 bg-accent-primary text-[#0B0B0B] font-mono py-3 rounded-sm font-bold tracking-widest uppercase shadow-[0_0_15px_rgba(0,246,255,0.3)] text-center block cursor-pointer"
-                            >
-                                Register Now
-                            </motion.a>
+                            <div className="px-6 pt-6 pb-6">
+                                <motion.a
+                                    href="https://techxtreme.gu-tech.org/event/technical/27"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    initial={{ opacity: 0 }}
+                                    animate={{ opacity: 1 }}
+                                    transition={{ delay: 0.5 }}
+                                    onClick={() => setIsMobileMenuOpen(false)}
+                                    className="block w-full bg-accent-primary text-[#0B0B0B] font-mono py-3.5 rounded-sm font-bold tracking-widest uppercase shadow-[0_0_15px_rgba(0,246,255,0.3)] hover:shadow-[0_0_25px_rgba(0,246,255,0.5)] active:scale-95 transition-all text-center cursor-pointer touch-manipulation"
+                                >
+                                    Register Now
+                                </motion.a>
+                            </div>
                         </div>
                     </motion.div>
                 )}
