@@ -27,7 +27,7 @@ export default function LoadingScreen() {
     return (
         <AnimatePresence>
             {isLoading && (
-                <motion.div 
+                <motion.div
                     className="fixed inset-0 z-[1000] flex flex-col items-center justify-center bg-[#0B0B0B] font-mono text-accent-primary"
                     exit={{ opacity: 0, scale: 1.1 }}
                     transition={{ duration: 0.8, ease: "easeInOut" }}
@@ -38,13 +38,13 @@ export default function LoadingScreen() {
                     <div className="relative z-10 w-full max-w-sm px-8">
                         {/* Loading Header */}
                         <div className="flex justify-between text-xs mb-2 opacity-70 tracking-[0.2em] uppercase">
-                            <span>Boot Sequence</span>
+                            <span>LOADING CircuitTrix...</span>
                             <span>{progress}%</span>
                         </div>
 
                         {/* Progress Bar Container */}
                         <div className="h-[2px] w-full bg-white/10 relative overflow-hidden mb-6">
-                            <motion.div 
+                            <motion.div
                                 className="absolute top-0 left-0 h-full bg-accent-primary shadow-[0_0_15px_#00F6FF]"
                                 initial={{ width: "0%" }}
                                 animate={{ width: `${progress}%` }}
@@ -63,7 +63,7 @@ export default function LoadingScreen() {
                                 {progress < 30 && "Initializing Core Processors..."}
                                 {progress >= 30 && progress < 60 && "Establishing Neural Links..."}
                                 {progress >= 60 && progress < 90 && "Loading Cybernetic Dashboards..."}
-                                {progress >= 90 && "System Online."}
+                                {progress >= 90 && "CircuitTrix is Ready."}
                             </motion.div>
                         </div>
 

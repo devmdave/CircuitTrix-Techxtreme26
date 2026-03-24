@@ -37,9 +37,9 @@ export default function Poster() {
                         </div>
 
                         <div className="flex flex-wrap gap-4 pt-4">
-                            <a href="#register" className="inline-block">
+                            <a href="https://techxtreme.gu-tech.org/event/technical/27" className="inline-block">
                                 <CyberButton variant="primary" className="px-8 py-4">
-                                    <span className="tracking-[0.2em] font-bold">SECURE PASS</span>
+                                    <span className="tracking-[0.2em] font-bold">REGISTER NOW</span>
                                     <ArrowRight size={18} className="ml-2" />
                                 </CyberButton>
                             </a>
@@ -84,7 +84,7 @@ export default function Poster() {
                             </div>
 
                             {/* The Poster Image wrapper */}
-                            <div className="relative w-full aspect-[3/4] overflow-hidden bg-[#111]">
+                            <div className="relative w-full aspect-[4/4] overflow-hidden bg-[#111]">
                                 {/* Using standard img tag. User should place a high-res poster named circuittrix-poster.jpg in their public folder */}
                                 <img
                                     src="/circuittrix-poster.jpeg"

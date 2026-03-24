@@ -438,7 +438,7 @@ export default function AboutCircuitTrix() {
                                         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" className="text-accent-primary">
                                             <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
                                         </svg>
-                                        <span className="text-text-primary font-bold">₹5,000 Cash Prize</span>
+                                        <span className="text-text-primary font-bold">₹1,500 Cash Prize</span>
                                     </div>
                                     <div className="flex items-center justify-center gap-2">
                                         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" className="text-accent-primary">
@@ -464,7 +464,7 @@ export default function AboutCircuitTrix() {
                                     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" className="text-accent-secondary">
                                         <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
                                     </svg>
-                                    <span className="text-text-primary font-bold">₹2,500 Cash Prize</span>
+                                    <span className="text-text-primary font-bold">₹500 Cash Prize</span>
                                 </div>
                                 <div className="flex items-center justify-center gap-2">
                                     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" className="text-accent-secondary">
@@ -513,13 +513,12 @@ export default function AboutCircuitTrix() {
                     <p className="text-lg text-text-muted max-w-2xl mx-auto mb-10">
                         Join CircuitTrix and showcase your expertise in electronics and circuit design!
                     </p>
-                    <div className="flex flex-col md:flex-row gap-6 justify-center max-w-lg mx-auto">
-                        <button className="btn btn-primary w-full py-4 text-lg">
-                            Register for CircuitTrix
-                        </button>
-                        <button className="btn btn-secondary w-full py-4 text-lg">
-                            View Rules
-                        </button>
+                    <div className="flex flex-col md:flex-row gap-6 justify-center max-w-2xl mx-auto">
+                        <a href="https://techxtreme.gu-tech.org/event/technical/27">
+                            <button className="btn btn-primary w-full py-4 text-md">
+                                Register for CircuitTrix
+                            </button>
+                        </a>
                     </div>
                 </div>
             </section>

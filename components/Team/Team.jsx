@@ -9,35 +9,35 @@ const teamMembers = [
         role: "COORDINATOR",
         image: "/team/madhav.jpg",
         id: "NODE-11A",
-        socials: { linkedin: "#", twitter: "#" }
+        socials: { linkedin: "https://www.linkedin.com/in/madhav-dave-52b552379/" }
     },
     {
         name: "JAMIN MARKANA",
         role: "CO-COORDINATOR",
         image: "/team/jaimin.jpeg",
         id: "NODE-22B",
-        socials: { linkedin: "#", github: "#" }
+        socials: { linkedin: "https://www.linkedin.com/in/jaimin-markana-2b6000383/" }
     },
     {
         name: "SACHI NAIK",
         role: "VOLUNTEER",
         image: "/team/sachi.jpeg",
         id: "NODE-33C",
-        socials: { linkedin: "#", instagram: "#" }
+        socials: { linkedin: "https://www.linkedin.com/in/sachi-naik-46a668381/" }
     },
     {
         name: "TRUSHTI RIBADIYA",
         role: "VOLUNTEER",
         image: "/team/trushti.jpeg",
         id: "NODE-44D",
-        socials: { twitter: "#", github: "#" }
+        socials: { linkedin: "https://www.linkedin.com/in/ribadiya-trushti-034aba389/" }
     },
     {
         name: "JAINIL AGAL",
         role: "VOLUNTEER",
         image: "/team/jainil.jpg",
         id: "NODE-55E",
-        socials: { linkedin: "#", instagram: "#" }
+        socials: { linkedin: "https://www.linkedin.com/in/jainil-agal-9aa992383/" }
     }
 ];
 
