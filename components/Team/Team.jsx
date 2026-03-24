@@ -33,9 +33,9 @@ const teamMembers = [
         socials: { twitter: "#", github: "#" }
     },
     {
-        name: "DAVID PARK",
+        name: "JAINIL AGAL",
         role: "VOLUNTEER",
-        image: "/team/jainil.jpeg",
+        image: "/team/jainil.jpg",
         id: "NODE-55E",
         socials: { linkedin: "#", instagram: "#" }
     }

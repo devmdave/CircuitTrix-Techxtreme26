@@ -51,14 +51,6 @@ export default function Navbar() {
                 : 'bg-transparent border-b border-transparent'
                 }`}
         >
-            {/* Top scanning line effect
-            {isScrolled && (
-                <motion.div
-                    className="absolute top-0 left-0 h-[1px] bg-accent-primary w-1/4 shadow-[0_0_10px_#00F6FF]"
-                    animate={{ x: ['-100%', '400%'] }}
-                    transition={{ repeat: Infinity, duration: 3, ease: 'linear' }}
-                />
-            )} */}
 
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
                 {/* Decorative circuit detail */}
@@ -96,16 +88,21 @@ export default function Navbar() {
 
                             {navItems.map((item, index) => {
                                 const id = item.toLowerCase();
+                                const hrefId = id === 'home' ? 'hero' : id;
                                 const isActive = activeSection === id;
                                 return (
                                     <div key={item} className="relative flex items-center">
-                                        <button
-                                            onClick={() => scrollToSection(id)}
-                                            className={`relative px-6 py-2.5 tracking-[0.2em] font-mono text-[10px] uppercase transition-all duration-300 group ${isActive ? 'text-accent-primary font-bold' : 'text-text-muted hover:text-white'
+                                        <a
+                                            href={`#${hrefId}`}
+                                            onClick={(e) => {
+                                                e.preventDefault();
+                                                scrollToSection(id);
+                                            }}
+                                            className={`block relative px-6 py-2.5 tracking-[0.2em] font-mono text-[10px] uppercase transition-all duration-300 group cursor-pointer ${isActive ? 'text-accent-primary font-bold' : 'text-text-muted hover:text-white'
                                                 }`}
                                         >
                                             {/* Top & Bottom decorative corners on hover */}
-                                            <div className="absolute top-0 left-0 w-1 h-[1px] bg-accent-primary/50 opacity-0 group-hover:opacity-100 transition-opacity" />
+                                             <div className="absolute top-0 left-0 w-1 h-[1px] bg-accent-primary/50 opacity-0 group-hover:opacity-100 transition-opacity" />
                                             <div className="absolute bottom-0 right-0 w-1 h-[1px] bg-accent-primary/50 opacity-0 group-hover:opacity-100 transition-opacity" />
 
                                             {/* Active State Background Layer */}
@@ -127,7 +124,7 @@ export default function Navbar() {
                                                     <span className="font-mono text-[8px] text-accent-primary/50 ml-1 opacity-70">.EXE</span>
                                                 )}
                                             </span>
-                                        </button>
+                                        </a>
 
                                         {/* Segment Divider */}
                                         {index < navItems.length - 1 && (
@@ -141,14 +138,16 @@ export default function Navbar() {
 
                     {/* Right Action */}
                     <div className="hidden md:flex relative group">
-                        <button
-                            className="bg-accent-primary/10 text-accent-primary border border-accent-primary px-6 py-2.5 rounded-sm font-mono text-xs uppercase tracking-widest relative overflow-hidden transition-all hover:bg-accent-primary hover:text-[#0B0B0B] hover:shadow-[0_0_20px_rgba(0,246,255,0.4)]"
-                            onClick={() => window.open('https://techxtreme.gu-tech.org/event/technical/27', '_blank', 'noopener,noreferrer')}
+                        <a
+                            href="https://techxtreme.gu-tech.org/event/technical/27"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="bg-accent-primary/10 text-accent-primary border border-accent-primary px-6 py-2.5 rounded-sm font-mono text-xs uppercase tracking-widest relative overflow-hidden transition-all hover:bg-accent-primary hover:text-[#0B0B0B] hover:shadow-[0_0_20px_rgba(0,246,255,0.4)] block cursor-pointer"
                         >
                             <span className="relative z-10 font-bold">REGISTER</span>
                             {/* Hover Scan Texture */}
                             <div className="absolute inset-0 bg-[linear-gradient(transparent_50%,rgba(0,0,0,0.1)_50%)] bg-[size:100%_4px] opacity-0 group-hover:opacity-100 transition-opacity z-0" />
-                        </button>
+                        </a>
                     </div>
 
                     {/* Mobile Menu Toggle */}
@@ -161,7 +160,8 @@ export default function Navbar() {
                             {isMobileMenuOpen ? (
                                 <path d="M18 6L6 18M6 6l12 12" />
                             ) : (
-                                <path d="M4 6h16M4 12h16M4 18h16" />
+                                <path d="M4 6
+                                h16M4 12h16M4 18h16" />
                             )}
                         </svg>
                     </button>
@@ -178,30 +178,40 @@ export default function Navbar() {
                         className="md:hidden bg-[#0a0a0a]/95 backdrop-blur-xl border-b border-accent-primary/20 overflow-y-auto max-h-[85vh]"
                     >
                         <div className="px-4 py-6 flex flex-col gap-4">
-                            {navItems.map((item, i) => (
-                                <motion.button
-                                    initial={{ opacity: 0, x: -20 }}
-                                    animate={{ opacity: 1, x: 0 }}
-                                    transition={{ delay: i * 0.1 }}
-                                    key={item}
-                                    onClick={() => scrollToSection(item.toLowerCase())}
-                                    className="text-left font-mono text-sm uppercase tracking-widest text-[#F2F2F2] py-3 border-b border-white/5 flex items-center justify-between group"
-                                >
-                                    <span>{item}</span>
-                                    <span className="text-accent-primary opacity-0 group-hover:opacity-100 transition-opacity">
-                                        &gt;
-                                    </span>
-                                </motion.button>
-                            ))}
-                            <motion.button
+                            {navItems.map((item, i) => {
+                                const id = item.toLowerCase();
+                                const hrefId = id === 'home' ? 'hero' : id;
+                                return (
+                                    <motion.a
+                                        href={`#${hrefId}`}
+                                        initial={{ opacity: 0, x: -20 }}
+                                        animate={{ opacity: 1, x: 0 }}
+                                        transition={{ delay: i * 0.1 }}
+                                        key={item}
+                                        onClick={(e) => {
+                                            e.preventDefault();
+                                            scrollToSection(id);
+                                        }}
+                                        className="text-left font-mono text-sm uppercase tracking-widest text-[#F2F2F2] py-3 border-b border-white/5 flex items-center justify-between group cursor-pointer block"
+                                    >
+                                        <span>{item}</span>
+                                        <span className="text-accent-primary opacity-0 group-hover:opacity-100 transition-opacity">
+                                            &gt;
+                                        </span>
+                                    </motion.a>
+                                );
+                            })}
+                            <motion.a
+                                href="https://techxtreme.gu-tech.org/event/technical/27"
+                                target="_blank"
+                                rel="noopener noreferrer"
                                 initial={{ opacity: 0 }}
                                 animate={{ opacity: 1 }}
                                 transition={{ delay: 0.5 }}
-                                className="mt-4 bg-accent-primary text-[#0B0B0B] font-mono py-3 rounded-sm font-bold tracking-widest uppercase shadow-[0_0_15px_rgba(0,246,255,0.3)]"
-                                onClick={() => window.open('https://techxtreme.gu-tech.org/event/technical/27', '_blank', 'noopener,noreferrer')}
+                                className="mt-4 bg-accent-primary text-[#0B0B0B] font-mono py-3 rounded-sm font-bold tracking-widest uppercase shadow-[0_0_15px_rgba(0,246,255,0.3)] text-center block cursor-pointer"
                             >
                                 Register Now
-                            </motion.button>
+                            </motion.a>
                         </div>
                     </motion.div>
                 )}
